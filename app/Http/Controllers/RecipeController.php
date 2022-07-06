@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RecipeResources;
 use Illuminate\Support\Str;
 use App\Models\Recipe;
 use App\Models\Nutrition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class RecipeController extends Controller
 {
@@ -15,9 +17,14 @@ class RecipeController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+  public function getDataApi()
+  {
+    return Http::get('http://recipe-api.test/api/recipes');
+  }
   public function index()
   {
-    $recipes = Recipe::all();
+    $collections = Http::get('http://recipe-api.test/api/recipes');
     $data = [
       'title' => 'Recipe List'
     ];
@@ -27,7 +34,7 @@ class RecipeController extends Controller
     } else {
       $backurl = '';
     }
-    return view('recipes.index', compact('recipes', 'data', 'backurl'));
+    return view('recipes.index', ['collections' => $collections['data']], compact('data', 'backurl'));
   }
 
   /**
@@ -37,7 +44,6 @@ class RecipeController extends Controller
    */
   public function create()
   {
-    $recipes = Recipe::all();
     if (isset($_SERVER['HTTP_REFERER'])) {
       $backurl = htmlspecialchars($_SERVER['HTTP_REFERER']);
     } else {
@@ -46,7 +52,7 @@ class RecipeController extends Controller
     $data = [
       'title' => 'New Recipe'
     ];
-    return view('recipes.create', compact('recipes', 'backurl', 'data'));
+    return view('recipes.create', compact('backurl', 'data'));
   }
 
   /**
@@ -57,6 +63,16 @@ class RecipeController extends Controller
    */
   public function store(Request $request)
   {
+    // $collections = Http::get('http://recipe-api.test/api/recipes')->json();
+    // $recipe = new Recipe;
+    // $recipe->name = $request->name;
+    // $recipe->servings = $request->servings;
+    // $recipe->quantity = $request->quantity;
+    // $recipe->energy = $request->energy;
+    // $recipe->slug = Str::slug($request->name, '-');
+    // $recipe->nutrition = $request->id;
+    // $recipe_result = $recipe->save();
+    // dd($recipe);
     $recipe = Recipe::create([
       'name' => $request->name,
       'servings' => $request->servings,

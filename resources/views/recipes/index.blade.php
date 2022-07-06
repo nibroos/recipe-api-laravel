@@ -43,44 +43,43 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                  @foreach ($recipes as $recipe)
+                  @foreach ($collections as $collection)
                     <tr>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {{ $recipe->id }}
-                      </td>
-
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {{ $recipe->name }}
+                        {{ $collection['id'] }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {{ $recipe->servings }}
+                        {{ $collection['name'] }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {{ $recipe->quantity }}
+                        {{ $collection['servings'] }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {{ $recipe->energy }}
+                        {{ $collection['quantity'] }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {{ $collection['energy'] }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         <div class="flex flex-row">
                           <div class="basis-1/2 font-bold">Protein</div>
-                          <div class="basis-1/2">{{ $recipe->nutrition->protein }}</div>
+                          <div class="basis-1/2">{{ $collection['nutrition']['protein'] }}</div>
                         </div>
                         <div class="flex flex-row">
                           <div class="basis-1/2 font-bold">Fat</div>
-                          <div class="basis-1/2">{{ $recipe->nutrition->fat }}</div>
+                          <div class="basis-1/2">{{ $collection['nutrition']['fat'] }}</div>
                         </div>
                         <div class="flex flex-row">
                           <div class="basis-1/2 font-bold">Carbs</div>
-                          <div class="basis-1/2">{{ $recipe->nutrition->carb }}</div>
+                          <div class="basis-1/2">{{ $collection['nutrition']['carb'] }}</div>
                         </div>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <a href="{{ route('recipes.show', Str::slug($recipe->name)) }}"
+                        <a href="{{ route('recipes.show', Str::slug($collection['name'])) }}"
                           class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
-                        <a href="{{ route('recipes.edit', Str::slug($recipe->name)) }}"
+                        <a href="{{ route('recipes.edit', Str::slug($collection['name'])) }}"
                           class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
-                        <form class="inline-block" action="{{ route('recipes.destroy', $recipe->id) }}"
+                        <form class="inline-block" action="{{ route('recipes.destroy', $collection['id']) }}"
                           method="POST" onsubmit="return confirm('Are you sure?');">
                           <input type="hidden" name="_method" value="DELETE">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
