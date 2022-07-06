@@ -15,7 +15,8 @@ class Recipe extends Model
         'servings',
         'quantity',
         'energy',
-        'slug'
+        'slug',
+        'nutrition_id'
     ];
 
     public function nutrition()

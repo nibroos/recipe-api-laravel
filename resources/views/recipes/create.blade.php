@@ -51,6 +51,27 @@
                     class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Energy<span
                       class="text-red-600"> *</span></label>
                 </div>
+                <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
+                  <input type="number" name="protein" id="protein" placeholder=" "
+                    class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none">
+                  <label for="protein"
+                    class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Protein<span
+                      class="text-red-600"> *</span></label>
+                </div>
+                <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
+                  <input type="number" name="fat" id="fat" placeholder=" "
+                    class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none">
+                  <label for="fat"
+                    class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Fat<span
+                      class="text-red-600"> *</span></label>
+                </div>
+                <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
+                  <input type="number" name="carb" id="carb" placeholder=" "
+                    class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none">
+                  <label for="carb"
+                    class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Carb<span
+                      class="text-red-600"> *</span></label>
+                </div>
                 <div class="flex">
                   <a href="{{ $backurl }}"
                     class="hidden sm:mt-4 sm:mr-2 bg-white border border-indigo-500 text-indigo-500 font-bold rounded-md hover:text-white hover:border-indigo-700 hover:bg-indigo-700 py-2 px-5 sm:inline-flex items-center transition sm:w-full sm:justify-center sm:py-3">

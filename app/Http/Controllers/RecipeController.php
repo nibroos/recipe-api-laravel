@@ -62,7 +62,8 @@ class RecipeController extends Controller
       'servings' => $request->servings,
       'quantity' => $request->quantity,
       'energy' => $request->energy,
-      'slug' => Str::slug($request->name, '-')
+      'slug' => Str::slug($request->name, '-'),
+      'nutrition_id' => $request->id
     ]);
 
     $nutrition = Nutrition::create([
@@ -71,6 +72,7 @@ class RecipeController extends Controller
       'fat' => $request->fat,
       'carb' => $request->carb
     ]);
+
     return redirect()->route('recipes.index', compact('recipe', 'nutrition'));
   }
 

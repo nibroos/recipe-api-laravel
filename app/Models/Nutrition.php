@@ -11,7 +11,7 @@ class Nutrition extends Model
 
     protected $fillable = [
         'recipe_id',
-        'protein ',
+        'protein',
         'fat',
         'carb'
     ];
