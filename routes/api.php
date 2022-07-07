@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('recipe/store', [RecipeController::class, 'store']);
 Route::get('recipes', [RecipeController::class, 'index']);
-Route::get('recipe/{id}/show', [RecipeController::class, 'show']);
+Route::get('recipe/show/{id}', [RecipeController::class, 'show']);
+Route::post('recipe/update/{id}', [RecipeController::class, 'update']);
+Route::delete('recipe/delete/{id}', [RecipeController::class, 'destroy']);

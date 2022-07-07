@@ -18,10 +18,6 @@ class RecipeController extends Controller
    * @return \Illuminate\Http\Response
    */
 
-  public function getDataApi()
-  {
-    return Http::get('http://recipe-api.test/api/recipes');
-  }
   public function index()
   {
     $collections = Http::get('http://recipe-api.test/api/recipes');
@@ -99,7 +95,7 @@ class RecipeController extends Controller
    */
   public function show($slug)
   {
-    $collections = Http::get('http://recipe-api.test/api/recipes')->json();
+    $collection = Http::get('http://recipe-api.test/api/recipe/show/{id}')->json();
     $recipe = Recipe::where('slug', $slug)->first();
     if (isset($_SERVER['HTTP_REFERER'])) {
       $backurl = htmlspecialchars($_SERVER['HTTP_REFERER']);

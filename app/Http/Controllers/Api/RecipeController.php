@@ -44,27 +44,54 @@ class RecipeController extends Controller
       'carb' => $request->carb
     ]);
 
-    // $recipe = new Recipe;
-    // $recipe->name = $request->name;
-    // $recipe->servings = $request->servings;
-    // $recipe->quantity = $request->quantity;
-    // $recipe->energy = $request->energy;
-    // $recipe->slug = Str::slug($request->name, '-');
-
-    // // $recipe->nutrition->protein = $request->protein;
-    // // $recipe->nutrition->fat = $request->fat;
-    // // $recipe->nutrition->carb = $request->carb;
-
-    // $nutrition = new Nutrition;
-    // $nutrition->recipe_id = $recipe->id;
-    // $nutrition->protein = $request->protein;
-    // $nutrition->fat = $request->fat;
-    // $nutrition->carb = $request->carb;
-
-    // $recipe->save();
-    // $nutrition->save();
     return response()->json([
       'message' => 'Recipe Added Successfully'
     ], 200);
+  }
+
+  public function update(Request $request, $id)
+  {
+    // $data = $request->validate([
+    //   'name' => 'nullable|string|max:100',
+    //   'servings' => 'nullable|integer'
+    // ]);
+    $recipe = Recipe::where('id', $id)->first();
+    if ($recipe) {
+      // $recipe->update($data);
+      $data = $recipe->update([
+        'name' => $request->name,
+        'servings' => $request->servings,
+        'quantity' => $request->quantity,
+        'energy' => $request->energy,
+        'slug' => Str::slug($request->name, '-')
+      ]);
+      $recipe['nutrition']->update([
+        'protein' => $request->protein,
+        'fat' => $request->fat,
+        'carb' => $request->carb
+      ]);
+      return response()->json([
+        'message' => 'Recipe Added',
+        'data' => $data
+      ], 200);
+    } else {
+      return response()->json([
+        'message' => 'Recipe Failed to Add'
+      ], 404);
+    };
+  }
+  public function destroy($id)
+  {
+    $recipe = Recipe::where('id', $id)->first();
+    $data = $recipe->delete();
+    if ($data) {
+      return response()->json([
+        'message' => 'Success Destroy Recipe'
+      ], 200);
+    } else {
+      return response()->json([
+        'message' => 'Failed Destroy Recipe'
+      ], 400);
+    }
   }
 }
