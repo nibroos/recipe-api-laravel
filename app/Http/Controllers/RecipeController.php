@@ -78,8 +78,7 @@ class RecipeController extends Controller
       'servings' => $request->servings,
       'quantity' => $request->quantity,
       'energy' => $request->energy,
-      'slug' => Str::slug($request->name, '-'),
-      'nutrition_id' => $request->id
+      'slug' => Str::slug($request->name, '-')
     ]);
 
     $nutrition = Nutrition::create([
@@ -100,6 +99,7 @@ class RecipeController extends Controller
    */
   public function show($slug)
   {
+    $collections = Http::get('http://recipe-api.test/api/recipes')->json();
     $recipe = Recipe::where('slug', $slug)->first();
     if (isset($_SERVER['HTTP_REFERER'])) {
       $backurl = htmlspecialchars($_SERVER['HTTP_REFERER']);

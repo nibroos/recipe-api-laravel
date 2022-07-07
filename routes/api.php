@@ -19,4 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('recipe/store', [RecipeController::class, 'store']);
 Route::get('recipes', [RecipeController::class, 'index']);
+Route::get('recipe/{id}/show', [RecipeController::class, 'show']);

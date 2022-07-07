@@ -56,6 +56,33 @@
                 <tr class="border-b">
                   <th scope="col"
                     class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Protein
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                    {{ $recipe->nutrition['protein'] }} g
+                  </td>
+                </tr>
+                <tr class="border-b">
+                  <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Fat
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                    {{ $recipe->nutrition['fat'] }} g
+                  </td>
+                </tr>
+                <tr class="border-b">
+                  <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Carb
+                  </th>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                    {{ $recipe->nutrition['carb'] }} g
+                  </td>
+                </tr>
+                <tr class="border-b">
+                  <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Created At
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">

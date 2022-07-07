@@ -21,7 +21,11 @@ class RecipeResources extends JsonResource
             'quantity' => $this->quantity,
             'energy' => $this->energy,
             'slug' => $this->slug,
-            'nutrition' => $this->nutrition,
+            'nutrition' => [
+                'protein' => $this->nutrition->protein,
+                'fat' => $this->nutrition->fat,
+                'carb' => $this->nutrition->carb,
+            ],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
