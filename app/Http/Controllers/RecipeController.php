@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RecipeResources;
 use Illuminate\Support\Str;
 use App\Models\Recipe;
 use App\Models\Nutrition;
