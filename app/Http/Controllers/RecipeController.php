@@ -20,7 +20,7 @@ class RecipeController extends Controller
 
   public function index()
   {
-    $collections = Http::get('http://recipe-api.test/api/recipes');
+    $collections = Http::get('http://recipe-api.test/api/recipes')->json();
     $data = [
       'title' => 'Recipe List'
     ];
@@ -30,7 +30,8 @@ class RecipeController extends Controller
     } else {
       $backurl = '';
     }
-    return view('recipes.index', ['collections' => $collections['data']], compact('data', 'backurl'));
+    // return view('recipes.index', ['collections' => $collections['data']], compact('data', 'backurl'));
+    return view('recipes.index', compact('collections', 'data', 'backurl'));
   }
 
   /**
@@ -59,32 +60,32 @@ class RecipeController extends Controller
    */
   public function store(Request $request)
   {
-    // $collections = Http::get('http://recipe-api.test/api/recipes')->json();
-    // $recipe = new Recipe;
-    // $recipe->name = $request->name;
-    // $recipe->servings = $request->servings;
-    // $recipe->quantity = $request->quantity;
-    // $recipe->energy = $request->energy;
-    // $recipe->slug = Str::slug($request->name, '-');
-    // $recipe->nutrition = $request->id;
-    // $recipe_result = $recipe->save();
-    // dd($recipe);
-    $recipe = Recipe::create([
+    $response = Http::asForm()->post('http://recipe-api.test/api/recipe/store', [
       'name' => $request->name,
       'servings' => $request->servings,
       'quantity' => $request->quantity,
       'energy' => $request->energy,
-      'slug' => Str::slug($request->name, '-')
-    ]);
-
-    $nutrition = Nutrition::create([
-      'recipe_id' => $recipe->id,
+      'slug' => Str::slug($request->name, '-'),
       'protein' => $request->protein,
       'fat' => $request->fat,
       'carb' => $request->carb
     ]);
+    // $recipe = Recipe::create([
+    //   'name' => $request->name,
+    //   'servings' => $request->servings,
+    //   'quantity' => $request->quantity,
+    //   'energy' => $request->energy,
+    //   'slug' => Str::slug($request->name, '-')
+    // ]);
 
-    return redirect()->route('recipes.index', compact('recipe', 'nutrition'));
+    // $nutrition = Nutrition::create([
+    //   'recipe_id' => $recipe->id,
+    //   'protein' => $request->protein,
+    //   'fat' => $request->fat,
+    //   'carb' => $request->carb
+    // ]);
+
+    return redirect()->route('recipes.index', compact('response'));
   }
 
   /**
@@ -93,20 +94,21 @@ class RecipeController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($slug)
+  public function show($id)
   {
-    $collection = Http::get('http://recipe-api.test/api/recipe/show/{id}')->json();
-    $recipe = Recipe::where('slug', $slug)->first();
+    // $json = json_decode(file_get_contents('http://host.com/api/v1/users/1'), true);
+    $collection = Http::get('http://recipe-api.test/api/recipe/show/' . $id)->json();
+    // $recipe = Recipe::where('slug', $slug)->first();
     if (isset($_SERVER['HTTP_REFERER'])) {
       $backurl = htmlspecialchars($_SERVER['HTTP_REFERER']);
     } else {
       $backurl = '/';
     }
     $data = [
-      'title' => $recipe['name'] . "'s Info"
+      'title' => $collection['name'] . "'s Info"
     ];
 
-    return view('recipes.show', compact('slug', 'recipe', 'data', 'backurl'));
+    return view('recipes.show', compact('collection', 'data', 'backurl'));
   }
 
   /**
@@ -115,17 +117,18 @@ class RecipeController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit($slug)
+  public function edit($id)
   {
-    $recipe = Recipe::where('slug', $slug)->first();
+    // $recipe = Recipe::where('slug', $slug)->first();
+    $collection = Http::get('http://recipe-api.test/api/recipe/show/' . $id)->json();
     if (isset($_SERVER['HTTP_REFERER'])) {
       $backurl = htmlspecialchars($_SERVER['HTTP_REFERER']);
     } else {
       $backurl = '';
     }
-    $nutrition = Nutrition::all();
+    // $nutrition = Nutrition::all();
 
-    return view('recipes.edit', compact('slug', 'recipe', 'backurl', 'nutrition'));
+    return view('recipes.edit', compact('backurl', 'collection'));
   }
 
   /**
@@ -137,7 +140,18 @@ class RecipeController extends Controller
    */
   public function update(Request $request, $id)
   {
-    //
+    Http::asForm()->post('http://recipe-api.test/api/recipe/update/' . $id, [
+      'id' => $request->id,
+      'name' => $request->name,
+      'servings' => $request->servings,
+      'quantity' => $request->quantity,
+      'energy' => $request->energy,
+      'slug' => Str::slug($request->name, '-'),
+      'protein' => $request->protein,
+      'fat' => $request->fat,
+      'carb' => $request->carb
+    ]);
+    return redirect()->route('recipes.index');
   }
 
   /**
@@ -146,10 +160,9 @@ class RecipeController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Recipe $recipe)
+  public function destroy($id)
   {
-    $recipe->delete();
-
+    Http::delete('http://recipe-api.test/api/recipe/delete/' . $id)->json();
     return redirect()->route('recipes.index');
   }
 }

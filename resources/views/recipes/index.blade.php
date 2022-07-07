@@ -75,9 +75,11 @@
                         </div>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <a href="{{ route('recipes.show', Str::slug($collection['name'])) }}"
+                        {{-- <a href="{{ route('recipes.show', Str::slug($collection['name'])) }}"
+                        class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a> --}}
+                        <a href="{{ route('recipes.show', $collection['id']) }}"
                           class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
-                        <a href="{{ route('recipes.edit', Str::slug($collection['name'])) }}"
+                        <a href="{{ route('recipes.edit', $collection['id']) }}"
                           class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
                         <form class="inline-block" action="{{ route('recipes.destroy', $collection['id']) }}"
                           method="POST" onsubmit="return confirm('Are you sure?');">

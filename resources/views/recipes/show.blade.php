@@ -11,19 +11,10 @@
                 <tr class="border-b">
                   <th scope="col"
                     class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    ID
-                  </th>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ $recipe->id }}
-                  </td>
-                </tr>
-                <tr class="border-b">
-                  <th scope="col"
-                    class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Name
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ $recipe->name }}
+                    {{ $collection['name'] }}
                   </td>
                 </tr>
                 <tr class="border-b">
@@ -32,7 +23,7 @@
                     Servings
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ $recipe->servings }}
+                    {{ $collection['servings'] }}
                   </td>
                 </tr>
                 <tr class="border-b">
@@ -41,7 +32,7 @@
                     Quantity
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ $recipe->quantity }} g
+                    {{ $collection['quantity'] }} g
                   </td>
                 </tr>
                 <tr class="border-b">
@@ -50,7 +41,7 @@
                     Energy
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ $recipe->energy }} kcal
+                    {{ $collection['energy'] }} kcal
                   </td>
                 </tr>
                 <tr class="border-b">
@@ -59,7 +50,7 @@
                     Protein
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ $recipe->nutrition['protein'] }} g
+                    {{ $collection['nutrition']['protein'] }} g
                   </td>
                 </tr>
                 <tr class="border-b">
@@ -68,7 +59,7 @@
                     Fat
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ $recipe->nutrition['fat'] }} g
+                    {{ $collection['nutrition']['fat'] }} g
                   </td>
                 </tr>
                 <tr class="border-b">
@@ -77,7 +68,7 @@
                     Carb
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ $recipe->nutrition['carb'] }} g
+                    {{ $collection['nutrition']['carb'] }} g
                   </td>
                 </tr>
                 <tr class="border-b">
@@ -86,7 +77,7 @@
                     Created At
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ date('F j, Y', strtotime($recipe->created_at)) }}
+                    {{ date('F j, Y', strtotime($collection['created_at'])) }}
                   </td>
                 </tr>
                 <tr class="border-b">
@@ -95,7 +86,7 @@
                     Update At
                   </th>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                    {{ date('F j, Y', strtotime($recipe->updated_at)) }}
+                    {{ date('F j, Y', strtotime($collection['updated_at'])) }}
                   </td>
                 </tr>
               </table>

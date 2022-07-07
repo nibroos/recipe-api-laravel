@@ -4,7 +4,7 @@
     <div class="max-w-2xl mx-auto sm:p-0 lg:px-8">
       <div class="mt-5 md:mt-0 md:col-span-2">
         {{-- form start --}}
-        <form method="post" action="{{ route('recipes.update', $recipe->id) }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('recipes.update', $collection['id']) }}" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           {{-- hidden input id --}}
@@ -26,7 +26,7 @@
                 <div class="mb-6 f-outline relative border focus-within:border-indigo-400">
                   <input type="text" name="name" id="name" placeholder=" "
                     class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent"
-                    value="{{ old('name', $recipe->name) }}" />
+                    value="{{ old('name', $collection['name']) }}" />
                   <label for="name"
                     class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Recipe
                     Name<span class="text-red-600"> *</span></label>
@@ -34,7 +34,7 @@
                 <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
                   <input type="number" name="servings" id="servings" placeholder=" "
                     class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none"
-                    value="{{ old('name', $recipe->servings) }}">
+                    value="{{ old('name', $collection['servings']) }}">
                   <label for="servings"
                     class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">
                     Servings<span class="text-red-600"> *</span></label>
@@ -42,17 +42,41 @@
                 <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
                   <input type="number" name="quantity" id="quantity" placeholder=" "
                     class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none"
-                    value="{{ old('name', $recipe->quantity) }}">
+                    value="{{ old('name', $collection['quantity']) }}">
                   <label for="quantity"
                     class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">
                     Quantity<span class="text-red-600"> *</span></label>
                 </div>
                 <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
-                  <input type="number" name="Energy" id="Energy" placeholder=" "
+                  <input type="number" name="energy" id="Energy" placeholder=" "
                     class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none"
-                    value="{{ old('name', $recipe->energy) }}">
+                    value="{{ old('name', $collection['energy']) }}">
                   <label for="Energy"
                     class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Energy<span
+                      class="text-red-600"> *</span></label>
+                </div>
+                <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
+                  <input type="number" name="protein" id="protein" placeholder=" "
+                    class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none"
+                    value="{{ old('name', $collection['nutrition']['protein']) }}">
+                  <label for="protein"
+                    class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Protein<span
+                      class="text-red-600"> *</span></label>
+                </div>
+                <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
+                  <input type="number" name="fat" id="fat" placeholder=" "
+                    class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none"
+                    value="{{ old('name', $collection['nutrition']['fat']) }}">
+                  <label for="fat"
+                    class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Fat<span
+                      class="text-red-600"> *</span></label>
+                </div>
+                <div class="mb-5 f-outline relative border focus-within:border-indigo-400">
+                  <input type="number" name="carb" id="carb" placeholder=" "
+                    class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent resize-none"
+                    value="{{ old('name', $collection['nutrition']['carb']) }}">
+                  <label for="carb"
+                    class="absolute ml-3 px-2 top-0 text-lg text-gray-700 bg-white mt-2 -z-1 duration-300 origin-0">Carb<span
                       class="text-red-600"> *</span></label>
                 </div>
                 <div class="flex">
