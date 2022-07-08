@@ -23,14 +23,8 @@ class RecipeController extends Controller
     $data = [
       'title' => 'Recipe List'
     ];
-
-    if (isset($_SERVER['HTTP_REFERER'])) {
-      $backurl = htmlspecialchars($_SERVER['HTTP_REFERER']);
-    } else {
-      $backurl = '';
-    }
     // return view('recipes.index', ['collections' => $collections['data']], compact('data', 'backurl'));
-    return view('recipes.index', compact('collections', 'data', 'backurl'));
+    return view('recipes.index', compact('collections', 'data'));
   }
 
   /**
@@ -140,7 +134,6 @@ class RecipeController extends Controller
   public function update(Request $request, $id)
   {
     Http::asForm()->post('http://recipe-api.test/api/recipe/update/' . $id, [
-      'id' => $request->id,
       'name' => $request->name,
       'servings' => $request->servings,
       'quantity' => $request->quantity,
